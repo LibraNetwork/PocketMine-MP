@@ -40,6 +40,7 @@ use pocketmine\player\GameMode;
 use pocketmine\Server;
 use pocketmine\thread\ThreadCrashException;
 use pocketmine\timings\Timings;
+use pocketmine\utils\TextFormat;
 use pocketmine\utils\Utils;
 use pocketmine\YmlServerProperties;
 use raklib\generic\DisconnectReason;
@@ -224,9 +225,9 @@ class RakLibInterface implements ServerEventListener, AdvancedNetworkInterface{
 
 				$this->interface->blockAddress($address, 5);
 			}catch(\Throwable $e){
-				//record the name of the player who caused the crash, to make it easier to find the reproducing steps
 				$this->server->getLogger()->emergency("Crash occurred while handling a packet from session: $name");
-				throw $e;
+				$this->server->exceptionHandler($e);
+				$session->disconnectWithError(TextFormat::RED . "Bir sorun oluştu. Lütfen tekrar sunucuya girin. Sunucu taraflı bir hata olduğunu düşünüyorsanız lütfen bize bildirin.");
 			}
 		}
 	}

@@ -41,6 +41,7 @@ use pocketmine\player\Player;
 use pocketmine\player\PlayerInfo;
 use pocketmine\player\XboxLivePlayerInfo;
 use pocketmine\Server;
+use pocketmine\utils\TextFormat;
 use Ramsey\Uuid\Uuid;
 use function is_array;
 
@@ -115,10 +116,10 @@ class LoginPacketHandler extends PacketHandler{
 			$this->server->requiresAuthentication()
 		);
 		if($this->server->getNetwork()->getValidConnectionCount() > $this->server->getMaxPlayers()){
-			$ev->setKickFlag(PlayerPreLoginEvent::KICK_FLAG_SERVER_FULL, KnownTranslationFactory::disconnectionScreen_serverFull());
+			$ev->setKickFlag(PlayerPreLoginEvent::KICK_FLAG_SERVER_FULL, TextFormat::RED . "Sunucu dolu!");
 		}
 		if(!$this->server->isWhitelisted($playerInfo->getUsername())){
-			$ev->setKickFlag(PlayerPreLoginEvent::KICK_FLAG_SERVER_WHITELISTED, KnownTranslationFactory::pocketmine_disconnect_whitelisted());
+			$ev->setKickFlag(PlayerPreLoginEvent::KICK_FLAG_SERVER_WHITELISTED, TextFormat::RED . "Sunucu bakımda!");
 		}
 
 		$banMessage = null;
