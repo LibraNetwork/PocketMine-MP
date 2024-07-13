@@ -1535,7 +1535,7 @@ class Server{
 		//If this is a thread crash, this logs where the exception came from on the main thread, as opposed to the
 		//crashed thread. This is intentional, and might be useful for debugging
 		//Assume that the thread already logged the original exception with the correct stack trace
-		$this->logger->logException($e, $trace);
+		//$this->logger->logException($e, $trace);
 
 		if($e instanceof ThreadCrashException){
 			$info = $e->getCrashInfo();
