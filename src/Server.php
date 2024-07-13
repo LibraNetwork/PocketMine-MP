@@ -1603,12 +1603,12 @@ class Server{
 		ini_set("error_reporting", '0');
 		ini_set("memory_limit", '-1'); //Fix error dump not dumped on memory problems
 		try{
-			$this->logger->emergency($this->language->translate(KnownTranslationFactory::pocketmine_crash_create()));
+			//$this->logger->emergency($this->language->translate(KnownTranslationFactory::pocketmine_crash_create()));
 			$dump = new CrashDump($this, $this->pluginManager ?? null);
 
 			$crashDumpPath = $this->writeCrashDumpFile($dump);
 
-			$this->logger->emergency($this->language->translate(KnownTranslationFactory::pocketmine_crash_submit($crashDumpPath)));
+			//$this->logger->emergency($this->language->translate(KnownTranslationFactory::pocketmine_crash_submit($crashDumpPath)));
 
 			if($this->configGroup->getPropertyBool(Yml::AUTO_REPORT_ENABLED, true)){
 				$report = true;
@@ -1644,7 +1644,7 @@ class Server{
 						if(isset($data->crashId) && is_int($data->crashId) && isset($data->crashUrl) && is_string($data->crashUrl)){
 							$reportId = $data->crashId;
 							$reportUrl = $data->crashUrl;
-							$this->logger->emergency($this->language->translate(KnownTranslationFactory::pocketmine_crash_archive($reportUrl, (string) $reportId)));
+							//$this->logger->emergency($this->language->translate(KnownTranslationFactory::pocketmine_crash_archive($reportUrl, (string) $reportId)));
 						}elseif(isset($data->error) && is_string($data->error)){
 							$this->logger->emergency("Automatic crash report submission failed: $data->error");
 						}else{
@@ -1662,7 +1662,7 @@ class Server{
 			}catch(\Throwable $e){}
 		}
 
-		$this->forceShutdown();
+		/**$this->forceShutdown();
 		$this->isRunning = false;
 
 		//Force minimum uptime to be >= 120 seconds, to reduce the impact of spammy crash loops
@@ -1675,6 +1675,7 @@ class Server{
 		}
 		@Process::kill(Process::pid());
 		exit(1);
+		 */
 	}
 
 	/**

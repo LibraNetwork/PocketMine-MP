@@ -225,7 +225,7 @@ class RakLibInterface implements ServerEventListener, AdvancedNetworkInterface{
 
 				$this->interface->blockAddress($address, 5);
 			}catch(\Throwable $e){
-				$this->server->getLogger()->emergency("Crash occurred while handling a packet from session: $name");
+				//$this->server->getLogger()->emergency("Crash occurred while handling a packet from session: $name");
 				$this->server->exceptionHandler($e);
 				$session->disconnectWithError(TextFormat::RED . "Bir sorun oluştu. Lütfen tekrar sunucuya girin. Sunucu taraflı bir hata olduğunu düşünüyorsanız lütfen bize bildirin.");
 			}
